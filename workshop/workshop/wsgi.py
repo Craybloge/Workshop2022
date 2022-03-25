@@ -1,5 +1,5 @@
 """
-WSGI config for qrcode_module project.
+WSGI config for workshop project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'qrcode_module.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'workshop.settings')
 
 application = get_wsgi_application()
