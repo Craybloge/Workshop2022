@@ -39,9 +39,12 @@ def home_view(request):
             new_url = request.build_absolute_uri('/') + shortened_object.short_url
             
             long_url = shortened_object.long_url 
+
+            url_list = Shortener.objects
              
             context['new_url']  = new_url
             context['long_url'] = long_url
+            context['url_list'] = url_list
              
             return render(request, template, context)
 
