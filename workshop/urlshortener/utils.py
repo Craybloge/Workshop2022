@@ -41,3 +41,21 @@ def create_shortened_url(model_instance, url="" ):
             return create_shortened_url(model_instance)
 
         return random_code
+    
+
+
+def qr_Code_generator(Data):
+    import qrcode
+    qr = qrcode.QRCode(
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    path = "./workshop/image/qr_codes/" + Data +".png"
+    qr.add_data(Data)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color="#9E7552", back_color="white")
+    img.save(path)
+    return(path)
+

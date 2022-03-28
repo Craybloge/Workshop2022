@@ -3,7 +3,7 @@ Url shortener model
 '''
 
 from django.db import models
-from .utils import create_shortened_url
+from .utils import create_shortened_url, qr_Code_generator
 
 class Shortener(models.Model):
     '''
@@ -24,6 +24,8 @@ class Shortener(models.Model):
     long_url = models.URLField()
 
     short_url = models.CharField(max_length=15, unique=True, blank=True)
+    
+    qr_code = models.CharField(max_length=200, blank=True)
 
     class Meta:
 
@@ -32,10 +34,11 @@ class Shortener(models.Model):
 
     def __str__(self):
 
-        return f'{self.long_url} to {self.short_url}'
+        return f'{self.long_url} to {self.short_url} and {self.qr_code}'
     
     def chooseShortUrl(self, url):
         self.short_url = (create_shortened_url(self, url))
+        self.qr_code = (qr_Code_generator(self.short_url))
 
     def save(self, *args, **kwargs):
 
