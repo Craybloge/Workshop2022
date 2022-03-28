@@ -1,40 +1,46 @@
-{% extends 'urlshortener/base.html' %} 
+{% extends 'urlshortener/base.html' %}
 
 {% block body %}
 
-<div class="container">
-  <div class="card mt-5">
-    <div class="card-header text-center py-3">
-      <h1>URL Shortner Application <i class="fas fa-link px-2"></i></h1>
-    </div>
-    <div class="px-3 py-4">
-      <form action="" method="POST">
-        {% csrf_token %}
-        <div class="row g-1">
-          <div class="col-10">{{form.long_url}}</div>
-          <div class="col-2">
-            <button class="btn btn-success btn-lg w-100" type="submit">
-              Shorten
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  {% if errors %}
-  <div class="alert alert-danger mt-4" role="alert">
-    <p>{{errors}}</p>
-  </div>
+<h1>URL Shortner Application</h1>
+<form action="" method="POST">
+  {% csrf_token %}
+  <div>{{form.long_url}}</div>
+  <button type="submit">
+    Shorten
+  </button>
+</form>
+{% if new_url %}
+
+<div>
+  <h2>Your shortened Url</h2>
+  <p>You can copy the Link below and share it with your friends</p>
+  <p>{{new_url}}</p>
+  <p><span>Previous URL:</span> {{long_url}}</p>
+</div>
 {% endif %}
 
-  {% if new_url %}
+<table>
+  <thead>
+    <tr>
+      <th>Short Url</th>
+      <th>Long Url</th>
+      <th>QR Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for url in url_list %}
+    <tr>
+      <th>{{url.short_url}}</th>
+      <th>{{url.long_url}}</th>
+      <th><img class="fit-picture" src={{url.qrcode}} alt="un QR Code"></th>
+    </tr>
+    {% endfor %}
 
-  <div class="mx-auto text-center mt-5">
-    <h2 class="text-danger">Your shortened Url</h2>
-    <p>You can copy the Link below and share it with your friends</p>
-    <p class="">{{new_url}}</p>
-    <p><span class="text-danger">Previous URL:</span> {{long_url}}</p>
-  </div>
-  {% endif %}
-</div>
+    <tr>
+      <td>The table body</td>
+      <td>with two columns</td>
+    </tr>
+  </tbody>
+</table>
 {% endblock body %}
