@@ -2,16 +2,33 @@
 
 {% block body %}
 
-<h1>URL Shortner Application</h1>
+<h1>KrowKaramel</h1>
+<h2>Création d'un nouveau qr code</h2>
 <form action="" method="POST">
   {% csrf_token %}
   <div>{{form.long_url}}</div>
   <button type="submit">
-    Shorten
+    Créer le qr Code
   </button>
 </form>
-{% if new_url %}
 
+<form action="" method="post">
+  {% csrf_token %}
+  <ul>
+    <li>
+      <div>{{form.long_url}}</div>
+    </li>
+    <li>
+      <div>{{form.short_url}}</div>
+    </li>
+  </ul>
+  <button type="submit">
+    Créer le qr Code
+  </button>
+
+</form>
+
+{% if new_url %}
 <div>
   <h2>Your shortened Url</h2>
   <p>You can copy the Link below and share it with your friends</p>
@@ -20,6 +37,7 @@
 </div>
 {% endif %}
 
+<h2>liste des qr codes existants:</h2>
 <table>
   <thead>
     <tr>
